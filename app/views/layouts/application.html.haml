@@ -1,0 +1,23 @@
+!!!
+%html
+%head
+  %title Railnote | For taking notes in rails.
+  = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+  = javascript_include_tag 'application', 'data-turbolinks-track' => true
+  = csrf_meta_tag
+%body
+  %header
+    .header_inner
+      = link_to "FileCabinet", root_path, id: "logo"
+
+      %nav
+        - if user_signed_in?
+          = link_to "Create Doc", new_doc_url
+          = link_to "Sign Out", destroy_user_session_url, method: :delete
+        - else
+          = link_to "Log In", new_user_session_url
+
+  %p.notice= notice
+  %p.alert= alert
+
+  = yield
